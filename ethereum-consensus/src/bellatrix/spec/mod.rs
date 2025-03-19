@@ -2124,7 +2124,7 @@ pub fn sample_proposer_index<
     context: &Context,
 ) -> Option<ValidatorIndex> {
     let max_byte = u8::MAX as u64;
-    let round_bytes: [u8; 8] = (round / 32).to_le_bytes();
+    let round_bytes: [u8; 8] = ((round as u64)/ 32).to_le_bytes();
     hash_input[32..].copy_from_slice(&round_bytes);
     let random_byte = hash(hash_input).as_ref()[round % 32] as u64;
     let effective_balance = state.validators[candidate_index].effective_balance;

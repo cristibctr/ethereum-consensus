@@ -22,7 +22,12 @@ pub const MIN_EPOCHS_TO_INACTIVITY_PENALTY: Epoch = 4;
 pub const EPOCHS_PER_HISTORICAL_VECTOR: usize = 64;
 pub const EPOCHS_PER_SLASHINGS_VECTOR: usize = 64;
 pub const HISTORICAL_ROOTS_LIMIT: usize = 16_777_216;
+#[cfg(not(target_arch = "wasm32"))]
 pub const VALIDATOR_REGISTRY_LIMIT: usize = 2usize.pow(40);
+
+#[cfg(target_arch = "wasm32")]
+//HOPING WE DON'T NEED A BIGGER VALUE
+pub const VALIDATOR_REGISTRY_LIMIT: usize = 4_294_967_295;
 pub const BASE_REWARD_FACTOR: u64 = 64;
 pub const WHISTLEBLOWER_REWARD_QUOTIENT: u64 = 512;
 pub const PROPOSER_REWARD_QUOTIENT: u64 = 8;
